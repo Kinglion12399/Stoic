@@ -1,0 +1,22 @@
+{
+  "name": "Сенека и Эпиктет",
+  "short_name": "Стоики",
+  "description": "Диалог с наставниками-стоиками",
+  "start_url": "/Stoic/",
+  "display": "standalone",
+  "background_color": "#090806",
+  "theme_color": "#090806",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://kinglion12399.github.io/Stoic/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://kinglion12399.github.io/Stoic/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
