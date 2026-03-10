@@ -499,7 +499,7 @@ function setMode(m) {
 async function callAPI(system, history, userText) {
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-api-key': 'ВСТАВЬ_КЛЮЧ_СЮДА', 'anthropic-version': '2023-06-01' },
+    headers: { 'Content-Type': 'application/json', 'x-api-key': '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', 'anthropic-version': '2023-06-01' },
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1000,
