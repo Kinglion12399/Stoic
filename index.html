@@ -431,7 +431,7 @@ textarea:focus { border-color: rgba(200,168,75,.4); }
   <div class="key-title">СТОИКИ</div>
   <div class="key-divider"></div>
   <div class="key-subtitle">Для работы приложения введи API ключ от Anthropic. Он сохранится только на твоём телефоне.</div>
-  <input class="key-input" id="keyInput" type="password" placeholder="sk-ant-api03-..." autocomplete="off" autocorrect="off" spellcheck="false"/>
+  <input class="key-input" id="keyInput" type="password" placeholder="gsk_..." autocomplete="off" autocorrect="off" spellcheck="false"/>
   <button class="key-btn" onclick="saveKey()">Сохранить и войти</button>
   <div class="key-note">Ключ хранится локально в браузере и нигде не передаётся кроме серверов Anthropic</div>
 </div>
@@ -583,18 +583,17 @@ function setMode(m) {
 
 // ── API ──
 async function callAPI(system, history, userText) {
-  const res = await fetch('https://api.anthropic.com/v1/messages', {
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-api-key': getApiKey(), 'anthropic-version': '2023-06-01' },
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getApiKey() },
     body: JSON.stringify({
-      model: 'claude-sonnet-4-20250514',
+      model: 'llama-3.3-70b-versatile',
       max_tokens: 1000,
-      system,
-      messages: [...history, { role: 'user', content: userText }]
+      messages: [{ role: 'system', content: system }, ...history, { role: 'user', content: userText }]
     })
   });
   const data = await res.json();
-  return data.content?.map(b=>b.text||'').join('') || '';
+  return data.choices?.[0]?.message?.content || '';
 }
 
 // ── SEND ──
@@ -679,8 +678,8 @@ function getApiKey() {
 
 function saveKey() {
   const k = document.getElementById('keyInput').value.trim();
-  if (!k.startsWith('sk-ant-')) {
-    alert('Ключ должен начинаться с sk-ant-...');
+  if (!k.startsWith('gsk_')) {
+    alert('Ключ Groq должен начинаться с gsk_...');
     return;
   }
   localStorage.setItem('stoic-api-key', k);
