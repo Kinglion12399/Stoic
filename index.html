@@ -55,6 +55,83 @@ body::before {
 }
 @keyframes breathe { 0%,100%{opacity:1;} 50%{opacity:.7;} }
 
+/* API KEY SCREEN */
+#keyScreen {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 24px;
+  gap: 20px;
+}
+#keyScreen.hidden { display: none; }
+
+.key-title {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-shadow: 0 0 24px rgba(200,168,75,.4);
+  text-align: center;
+}
+.key-subtitle {
+  font-style: italic;
+  font-size: 14px;
+  color: var(--text-dim);
+  text-align: center;
+  line-height: 1.7;
+  max-width: 300px;
+}
+.key-divider {
+  width: 80px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold-dim), transparent);
+}
+.key-input {
+  width: 100%;
+  max-width: 340px;
+  background: rgba(22,18,10,.88);
+  border: 1px solid rgba(200,168,75,.25);
+  color: var(--text);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 13px;
+  padding: 12px 14px;
+  outline: none;
+  letter-spacing: 0.5px;
+  text-align: center;
+  -webkit-appearance: none;
+}
+.key-input:focus { border-color: rgba(200,168,75,.5); }
+.key-input::placeholder { color: rgba(120,110,80,.4); font-style: italic; font-size: 12px; }
+.key-btn {
+  width: 100%;
+  max-width: 340px;
+  background: linear-gradient(135deg, rgba(200,168,75,.15), rgba(200,168,75,.08));
+  border: 1px solid rgba(200,168,75,.35);
+  color: var(--gold);
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  letter-spacing: 3px;
+  padding: 14px;
+  cursor: pointer;
+  text-transform: uppercase;
+  -webkit-appearance: none;
+  transition: all .2s;
+}
+.key-btn:active { background: rgba(200,168,75,.25); }
+.key-note {
+  font-size: 11px;
+  color: var(--text-dim);
+  text-align: center;
+  opacity: .6;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
 /* HEADER */
 header {
   position: relative;
@@ -350,6 +427,15 @@ textarea:focus { border-color: rgba(200,168,75,.4); }
 </head>
 <body>
 
+<div id="keyScreen" class="hidden">
+  <div class="key-title">СТОИКИ</div>
+  <div class="key-divider"></div>
+  <div class="key-subtitle">Для работы приложения введи API ключ от Anthropic. Он сохранится только на твоём телефоне.</div>
+  <input class="key-input" id="keyInput" type="password" placeholder="sk-ant-api03-..." autocomplete="off" autocorrect="off" spellcheck="false"/>
+  <button class="key-btn" onclick="saveKey()">Сохранить и войти</button>
+  <div class="key-note">Ключ хранится локально в браузере и нигде не передаётся кроме серверов Anthropic</div>
+</div>
+
 <header>
   <div class="phil-col seneca">
     <div class="era">4 до н.э. — 65 н.э.</div>
@@ -499,7 +585,7 @@ function setMode(m) {
 async function callAPI(system, history, userText) {
   const res = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-api-key': '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', 'anthropic-version': '2023-06-01' },
+    headers: { 'Content-Type': 'application/json', 'x-api-key': getApiKey(), 'anthropic-version': '2023-06-01' },
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1000,
@@ -586,17 +672,38 @@ inp.addEventListener('input', () => {
 // Prevent zoom on double-tap iOS
 document.addEventListener('dblclick', e => e.preventDefault(), { passive: false });
 
+// ── API KEY ──
+function getApiKey() {
+  return localStorage.getItem('stoic-api-key') || '';
+}
+
+function saveKey() {
+  const k = document.getElementById('keyInput').value.trim();
+  if (!k.startsWith('sk-ant-')) {
+    alert('Ключ должен начинаться с sk-ant-...');
+    return;
+  }
+  localStorage.setItem('stoic-api-key', k);
+  document.getElementById('keyScreen').classList.add('hidden');
+  setTimeout(() => doSend('__init__'), 300);
+}
+
+// ── INIT ──
 // ── INIT ──
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('sw.js').catch(()=>{});
 }
 
-const had = load();
-if (had) {
-  savedMsgs.forEach(m => renderMsg(m, true));
-  scrollDown();
+if (!getApiKey()) {
+  document.getElementById('keyScreen').classList.remove('hidden');
 } else {
-  setTimeout(()=>doSend('__init__'), 500);
+  const had = load();
+  if (had) {
+    savedMsgs.forEach(m => renderMsg(m, true));
+    scrollDown();
+  } else {
+    setTimeout(() => doSend('__init__'), 500);
+  }
 }
 </script>
 </body>
