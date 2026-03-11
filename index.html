@@ -563,7 +563,8 @@ function renderEntries(){
 // ── CHAT ──
 function scrollDown(){msgsEl.scrollTop=msgsEl.scrollHeight;}
 function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/&lt;em&gt;/g,'<em>').replace(/&lt;\/em&gt;/g,'</em>');}
-function fmt(s){return esc(s).split(/\n\n+/).map(p=>`<p>${p.replace(/\n/g,'<br>')}</p>`).join('');}
+function cleanText(s){return s.replace(/[\u3000-\u9fff\uff00-\uffef]/g,"");}
+function fmt(s){return esc(cleanText(s)).split(/\n\n+/).map(p=>`<p>${p.replace(/\n/g,'<br>')}</p>`).join('');}
 
 function renderMsg(m,skipSave){
   const w=document.createElement('div');
