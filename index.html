@@ -63,6 +63,8 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .quote-author.seneca{color:var(--gold-dim);}
 .quote-author.epictetus{color:var(--silver-dim);}
 .quote-author.marcus{color:var(--marcus-dim);}
+.quote-label-top{font-family:'Cinzel',serif;font-size:7px;letter-spacing:3px;text-transform:uppercase;color:var(--gold-dim);margin-bottom:10px;width:100%;max-width:380px;text-align:left;}
+.quote-block{margin-bottom:10px;}
 
 /* CARDS */
 .phil-cards{width:100%;max-width:380px;display:flex;flex-direction:column;gap:10px;}
@@ -253,13 +255,29 @@ textarea:focus{border-color:rgba(200,168,75,.4);}
     <div class="home-main">СТОИКИ</div>
     <div class="home-sub">Три голоса одной философии</div>
     <div class="home-divider"></div>
-    <div class="quote-block">
+    <div class="quote-label-top">✦ Цитаты дня</div>
+    <div class="quote-block" id="qb-seneca">
       <div class="quote-ornament">"</div>
-      <div class="quote-label">✦ Цитата дня</div>
-      <div class="quote-text" id="quoteText">…</div>
+      <div class="quote-text" id="quoteText-seneca">…</div>
       <div class="quote-footer">
-        <span class="quote-gem" id="quoteGem"></span>
-        <span class="quote-author" id="quoteAuthor"></span>
+        <span class="quote-gem seneca"></span>
+        <span class="quote-author seneca">— Сенека</span>
+      </div>
+    </div>
+    <div class="quote-block" id="qb-epictetus">
+      <div class="quote-ornament">"</div>
+      <div class="quote-text" id="quoteText-epictetus">…</div>
+      <div class="quote-footer">
+        <span class="quote-gem epictetus"></span>
+        <span class="quote-author epictetus">— Эпиктет</span>
+      </div>
+    </div>
+    <div class="quote-block" id="qb-marcus">
+      <div class="quote-ornament">"</div>
+      <div class="quote-text" id="quoteText-marcus">…</div>
+      <div class="quote-footer">
+        <span class="quote-gem marcus"></span>
+        <span class="quote-author marcus">— Марк Аврелий</span>
       </div>
     </div>
     <div class="phil-cards">
@@ -445,11 +463,13 @@ function saveKey(){
 }
 
 function showDailyQuote(){
-  const q=QUOTES[Math.floor(Date.now()/86400000)%QUOTES.length];
-  document.getElementById('quoteText').textContent=q.t;
-  document.getElementById('quoteAuthor').textContent='— '+q.a;
-  document.getElementById('quoteAuthor').className='quote-author '+q.p;
-  document.getElementById('quoteGem').className='quote-gem '+q.p;
+  const day=Math.floor(Date.now()/86400000);
+  const qSen=QUOTES.filter(q=>q.p==='seneca');
+  const qEpi=QUOTES.filter(q=>q.p==='epictetus');
+  const qMar=QUOTES.filter(q=>q.p==='marcus');
+  document.getElementById('quoteText-seneca').textContent=qSen[day%qSen.length].t;
+  document.getElementById('quoteText-epictetus').textContent=qEpi[day%qEpi.length].t;
+  document.getElementById('quoteText-marcus').textContent=qMar[day%qMar.length].t;
 }
 
 function showHome(){
