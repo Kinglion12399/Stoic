@@ -17,6 +17,7 @@
   --gold: #c8a84b; --gold-light: #e8c96a; --gold-dim: #6a5528;
   --silver: #9aabb8; --silver-light: #c4d4e0; --silver-dim: #4a5a66;
   --marcus: #a0785a; --marcus-light: #c8a080; --marcus-dim: #5a3e28;
+  --agora: #7a9a6a; --agora-light: #a0c090; --agora-dim: #3a5a2a;
   --text: #e4d8be; --text-dim: #7a6e58;
   --safe-top: env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -24,49 +25,104 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
 html,body{height:100%;overflow:hidden;background:var(--bg);}
 body{color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;display:flex;flex-direction:column;height:100dvh;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 20% 80%,rgba(200,168,75,.05) 0%,transparent 60%),radial-gradient(ellipse 50% 35% at 80% 70%,rgba(100,143,168,.04) 0%,transparent 60%),radial-gradient(ellipse 40% 30% at 50% 20%,rgba(160,120,90,.04) 0%,transparent 60%);pointer-events:none;z-index:0;animation:breathe 8s ease-in-out infinite;}
-@keyframes breathe{0%,100%{opacity:1;}50%{opacity:.7;}}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 60% 40% at 20% 80%,rgba(200,168,75,.05) 0%,transparent 60%),radial-gradient(ellipse 50% 35% at 80% 70%,rgba(100,143,168,.04) 0%,transparent 60%),radial-gradient(ellipse 40% 30% at 50% 20%,rgba(160,120,90,.04) 0%,transparent 60%);pointer-events:none;z-index:0;}
 
-#keyScreen{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;gap:18px;}
+/* KEY SCREEN */
+#keyScreen{position:fixed;inset:0;background:var(--bg);z-index:200;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:32px 24px;gap:18px;}
 #keyScreen.hidden{display:none;}
-.key-title{font-family:'Cinzel',serif;font-size:22px;letter-spacing:4px;color:var(--gold);text-shadow:0 0 24px rgba(200,168,75,.4);text-align:center;}
-.key-subtitle{font-style:italic;font-size:13px;color:var(--text-dim);text-align:center;line-height:1.7;max-width:300px;}
+.key-title{font-family:'Cinzel',serif;font-size:24px;letter-spacing:5px;color:var(--gold);text-shadow:0 0 24px rgba(200,168,75,.4);text-align:center;}
+.key-sub{font-style:italic;font-size:13px;color:var(--text-dim);text-align:center;line-height:1.7;max-width:300px;}
 .key-divider{width:80px;height:1px;background:linear-gradient(to right,transparent,var(--gold-dim),transparent);}
 .key-input{width:100%;max-width:340px;background:rgba(22,18,10,.88);border:1px solid rgba(200,168,75,.25);color:var(--text);font-family:'Cormorant Garamond',serif;font-size:13px;padding:12px 14px;outline:none;text-align:center;-webkit-appearance:none;}
 .key-input:focus{border-color:rgba(200,168,75,.5);}
 .key-input::placeholder{color:rgba(120,110,80,.4);font-style:italic;font-size:12px;}
-.key-btn{width:100%;max-width:340px;background:linear-gradient(135deg,rgba(200,168,75,.15),rgba(200,168,75,.08));border:1px solid rgba(200,168,75,.35);color:var(--gold);font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;padding:14px;cursor:pointer;text-transform:uppercase;-webkit-appearance:none;transition:all .2s;}
-.key-btn:active{background:rgba(200,168,75,.25);}
+.key-btn{width:100%;max-width:340px;background:linear-gradient(135deg,rgba(200,168,75,.15),rgba(200,168,75,.08));border:1px solid rgba(200,168,75,.35);color:var(--gold);font-family:'Cinzel',serif;font-size:10px;letter-spacing:3px;padding:14px;cursor:pointer;text-transform:uppercase;-webkit-appearance:none;}
 .key-note{font-size:11px;color:var(--text-dim);text-align:center;opacity:.6;line-height:1.6;max-width:300px;}
 
-header{position:relative;z-index:10;display:flex;align-items:stretch;border-bottom:1px solid rgba(200,168,75,.15);background:rgba(9,8,6,.98);flex-shrink:0;padding-top:var(--safe-top);}
-.phil-col{flex:1;text-align:center;padding:10px 4px 8px;display:flex;flex-direction:column;align-items:center;gap:2px;}
-.phil-col.seneca{border-right:1px solid rgba(200,168,75,.1);}
-.phil-col.marcus{border-left:1px solid rgba(160,120,90,.1);}
-.era{font-family:'Cinzel',serif;font-size:6px;letter-spacing:2px;text-transform:uppercase;}
-.seneca .era{color:var(--gold-dim);} .epictetus .era{color:var(--silver-dim);} .marcus .era{color:var(--marcus-dim);}
-.phil-name{font-family:'Cinzel',serif;font-weight:700;font-size:clamp(9px,3vw,15px);letter-spacing:2px;}
-.seneca .phil-name{color:var(--gold);text-shadow:0 0 16px rgba(200,168,75,.4);}
-.epictetus .phil-name{color:var(--silver);text-shadow:0 0 16px rgba(154,171,184,.35);}
-.marcus .phil-name{color:var(--marcus);text-shadow:0 0 16px rgba(160,120,90,.4);}
-.phil-role{font-style:italic;font-size:7px;opacity:.6;}
-.seneca .phil-role{color:var(--gold);} .epictetus .phil-role{color:var(--silver);} .marcus .phil-role{color:var(--marcus);}
-.hdr-mid{display:flex;align-items:center;justify-content:center;width:20px;flex-shrink:0;border-left:1px solid rgba(200,168,75,.08);border-right:1px solid rgba(200,168,75,.08);}
-.et{font-family:'Cinzel',serif;font-size:5px;color:var(--text-dim);writing-mode:vertical-lr;opacity:.5;}
+/* HOME SCREEN */
+#homeScreen{position:fixed;inset:0;background:var(--bg);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;gap:0;}
+#homeScreen.hidden{display:none;}
+
+.home-title{font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px;}
+.home-main{font-family:'Cinzel',serif;font-size:28px;letter-spacing:6px;color:var(--gold);text-shadow:0 0 30px rgba(200,168,75,.35);margin-bottom:4px;}
+.home-sub{font-style:italic;font-size:13px;color:var(--text-dim);margin-bottom:40px;}
+.home-divider{width:100px;height:1px;background:linear-gradient(to right,transparent,var(--gold-dim),transparent);margin-bottom:40px;}
+
+.phil-cards{width:100%;max-width:380px;display:flex;flex-direction:column;gap:10px;}
+
+.phil-card{display:flex;align-items:center;gap:16px;padding:16px 20px;cursor:pointer;border:1px solid;transition:all .25s;-webkit-appearance:none;background:transparent;width:100%;text-align:left;}
+.phil-card.sen{border-color:rgba(200,168,75,.2);} .phil-card.sen:active{background:rgba(200,168,75,.08);border-color:var(--gold);}
+.phil-card.epi{border-color:rgba(154,171,184,.2);} .phil-card.epi:active{background:rgba(154,171,184,.06);border-color:var(--silver);}
+.phil-card.mar{border-color:rgba(160,120,90,.2);} .phil-card.mar:active{background:rgba(160,120,90,.07);border-color:var(--marcus);}
+.phil-card.all{border-color:rgba(122,154,106,.2);margin-top:6px;} .phil-card.all:active{background:rgba(122,154,106,.07);border-color:var(--agora);}
+
+.card-gem{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.sen .card-gem{background:var(--gold);box-shadow:0 0 10px rgba(200,168,75,.6);}
+.epi .card-gem{background:var(--silver);box-shadow:0 0 10px rgba(154,171,184,.5);}
+.mar .card-gem{background:var(--marcus);box-shadow:0 0 10px rgba(160,120,90,.5);}
+.all .card-gem{background:var(--agora);box-shadow:0 0 10px rgba(122,154,106,.5);}
+
+.card-info{flex:1;}
+.card-name{font-family:'Cinzel',serif;font-size:13px;letter-spacing:2px;margin-bottom:2px;}
+.sen .card-name{color:var(--gold);}
+.epi .card-name{color:var(--silver);}
+.mar .card-name{color:var(--marcus);}
+.all .card-name{color:var(--agora);}
+.card-role{font-style:italic;font-size:11px;color:var(--text-dim);}
+
+.card-arrow{font-family:'Cinzel',serif;font-size:14px;color:var(--text-dim);opacity:.4;}
+
+.unread{background:var(--gold);color:#090806;font-family:'Cinzel',serif;font-size:8px;min-width:18px;height:18px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:0 5px;flex-shrink:0;}
+.epi .unread{background:var(--silver);}
+.mar .unread{background:var(--marcus);}
+.all .unread{background:var(--agora);}
+
+/* CHAT SCREEN */
+#chatScreen{position:fixed;inset:0;background:var(--bg);z-index:50;display:flex;flex-direction:column;}
+#chatScreen.hidden{display:none;}
+
+.chat-header{position:relative;z-index:10;display:flex;align-items:center;gap:12px;border-bottom:1px solid;background:rgba(9,8,6,.98);flex-shrink:0;padding:12px 16px;padding-top:calc(12px + var(--safe-top));}
+.chat-header.sen{border-color:rgba(200,168,75,.2);}
+.chat-header.epi{border-color:rgba(154,171,184,.2);}
+.chat-header.mar{border-color:rgba(160,120,90,.2);}
+.chat-header.all-h{border-color:rgba(122,154,106,.2);}
+
+.back-btn{background:transparent;border:none;color:var(--text-dim);font-family:'Cinzel',serif;font-size:18px;cursor:pointer;padding:0 4px;line-height:1;-webkit-appearance:none;}
+
+.chat-gem{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+.chat-header.sen .chat-gem{background:var(--gold);box-shadow:0 0 10px rgba(200,168,75,.7);}
+.chat-header.epi .chat-gem{background:var(--silver);box-shadow:0 0 10px rgba(154,171,184,.6);}
+.chat-header.mar .chat-gem{background:var(--marcus);box-shadow:0 0 10px rgba(160,120,90,.6);}
+.chat-header.all-h .chat-gem{background:var(--agora);box-shadow:0 0 10px rgba(122,154,106,.6);}
+
+.chat-hdr-info{flex:1;}
+.chat-hdr-name{font-family:'Cinzel',serif;font-size:14px;letter-spacing:3px;}
+.chat-header.sen .chat-hdr-name{color:var(--gold);}
+.chat-header.epi .chat-hdr-name{color:var(--silver);}
+.chat-header.mar .chat-hdr-name{color:var(--marcus);}
+.chat-header.all-h .chat-hdr-name{color:var(--agora);}
+.chat-hdr-role{font-style:italic;font-size:10px;color:var(--text-dim);}
+
+.clear-btn{background:transparent;border:none;color:var(--text-dim);font-family:'Cinzel',serif;font-size:7px;letter-spacing:1px;text-transform:uppercase;cursor:pointer;opacity:.45;padding:4px 6px;-webkit-appearance:none;}
 
 #msgs{flex:1;overflow-y:auto;overflow-x:hidden;padding:14px 12px;display:flex;flex-direction:column;gap:12px;position:relative;z-index:10;-webkit-overflow-scrolling:touch;}
 #msgs::-webkit-scrollbar{width:2px;} #msgs::-webkit-scrollbar-thumb{background:var(--gold-dim);border-radius:2px;}
+
 .msg{max-width:88%;animation:slideIn .4s cubic-bezier(.22,.68,0,1.2) forwards;opacity:0;}
-.msg.seneca,.msg.epictetus,.msg.marcus{align-self:flex-start;} .msg.user{align-self:flex-end;}
+.msg.seneca,.msg.epictetus,.msg.marcus,.msg.agora{align-self:flex-start;} .msg.user{align-self:flex-end;}
 @keyframes slideIn{from{opacity:0;transform:translateY(14px) scale(.97);}to{opacity:1;transform:translateY(0) scale(1);}}
+
 .msg-label{display:flex;align-items:center;gap:6px;margin-bottom:4px;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;text-transform:uppercase;}
 .msg.user .msg-label{flex-direction:row-reverse;color:var(--text-dim);}
-.msg.seneca .msg-label{color:var(--gold-dim);} .msg.epictetus .msg-label{color:var(--silver-dim);} .msg.marcus .msg-label{color:var(--marcus-dim);}
-.gem{width:7px;height:7px;border-radius:50%;flex-shrink:0;display:inline-block;}
+.msg.seneca .msg-label{color:var(--gold-dim);} .msg.epictetus .msg-label{color:var(--silver-dim);} .msg.marcus .msg-label{color:var(--marcus-dim);} .msg.agora .msg-label{color:var(--agora-dim);}
+
+.gem{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
 .msg.seneca .gem{background:var(--gold);box-shadow:0 0 7px rgba(200,168,75,.7);}
 .msg.epictetus .gem{background:var(--silver);box-shadow:0 0 7px rgba(154,171,184,.6);}
 .msg.marcus .gem{background:var(--marcus);box-shadow:0 0 7px rgba(160,120,90,.6);}
+.msg.agora .gem{background:var(--agora);box-shadow:0 0 7px rgba(122,154,106,.6);}
 .msg.user .gem{background:var(--text-dim);}
+
 .bubble{padding:12px 16px;font-size:clamp(13.5px,3.5vw,15.5px);line-height:1.8;}
 .bubble p{margin-bottom:.5em;} .bubble p:last-child{margin-bottom:0;} .bubble em{font-style:italic;}
 .msg.seneca .bubble{background:rgba(40,32,14,.92);border-left:2px solid var(--gold);border-top:1px solid rgba(200,168,75,.18);color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.4);}
@@ -75,256 +131,354 @@ header{position:relative;z-index:10;display:flex;align-items:stretch;border-bott
 .msg.epictetus .bubble em{color:var(--silver-light);}
 .msg.marcus .bubble{background:rgba(34,22,14,.92);border-left:2px solid var(--marcus);border-top:1px solid rgba(160,120,90,.18);color:#e8d8c4;box-shadow:0 4px 20px rgba(0,0,0,.4);}
 .msg.marcus .bubble em{color:var(--marcus-light);}
+.msg.agora .bubble{background:rgba(18,28,16,.92);border-left:2px solid var(--agora);border-top:1px solid rgba(122,154,106,.18);color:#d0e4c8;box-shadow:0 4px 20px rgba(0,0,0,.4);}
+.msg.agora .bubble em{color:var(--agora-light);}
 .msg.user .bubble{background:rgba(15,13,10,.75);border-right:2px solid rgba(100,90,65,.3);border-top:1px solid rgba(100,90,65,.12);color:var(--text-dim);font-style:italic;}
+
 .badge{display:inline-flex;align-items:center;gap:5px;margin-bottom:8px;font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;padding:2px 8px 2px 6px;border:1px solid;}
 .msg.seneca .badge{color:var(--gold);border-color:var(--gold-dim);background:rgba(200,168,75,.05);}
 .msg.epictetus .badge{color:var(--silver);border-color:var(--silver-dim);background:rgba(154,171,184,.05);}
 .msg.marcus .badge{color:var(--marcus);border-color:var(--marcus-dim);background:rgba(160,120,90,.05);}
+.msg.agora .badge{color:var(--agora);border-color:var(--agora-dim);background:rgba(122,154,106,.05);}
 
 .typing{display:none;align-self:flex-start;padding:9px 13px;border-left:2px solid;gap:5px;align-items:center;font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;}
-.typing.seneca-t{border-color:var(--gold-dim);background:rgba(40,32,14,.5);color:var(--gold-dim);}
-.typing.epictetus-t{border-color:var(--silver-dim);background:rgba(14,24,34,.5);color:var(--silver-dim);}
-.typing.marcus-t{border-color:var(--marcus-dim);background:rgba(34,22,14,.5);color:var(--marcus-dim);}
+.typing.sen-t{border-color:var(--gold-dim);background:rgba(40,32,14,.5);color:var(--gold-dim);}
+.typing.epi-t{border-color:var(--silver-dim);background:rgba(14,24,34,.5);color:var(--silver-dim);}
+.typing.mar-t{border-color:var(--marcus-dim);background:rgba(34,22,14,.5);color:var(--marcus-dim);}
 .typing.show{display:flex;}
 .td{width:5px;height:5px;border-radius:50%;animation:tp 1.2s ease-in-out infinite;}
-.seneca-t .td{background:var(--gold-dim);} .epictetus-t .td{background:var(--silver-dim);} .marcus-t .td{background:var(--marcus-dim);}
+.sen-t .td{background:var(--gold-dim);} .epi-t .td{background:var(--silver-dim);} .mar-t .td{background:var(--marcus-dim);}
 .td:nth-child(2){animation-delay:.2s;} .td:nth-child(3){animation-delay:.4s;}
 @keyframes tp{0%,100%{opacity:.3;transform:scale(.75);}50%{opacity:1;transform:scale(1);}}
 
-footer{position:relative;z-index:10;background:rgba(7,6,4,.97);border-top:1px solid rgba(200,168,75,.12);flex-shrink:0;padding-bottom:var(--safe-bottom);}
-.mode-row{display:flex;gap:5px;padding:8px 10px 6px;}
-.mbtn{flex:1;font-family:'Cinzel',serif;font-size:7px;letter-spacing:1px;text-transform:uppercase;padding:7px 2px;cursor:pointer;border:1px solid;background:transparent;transition:all .2s;-webkit-appearance:none;}
-.mbtn.sen{border-color:var(--gold-dim);color:var(--gold-dim);}
-.mbtn.sen.active{border-color:var(--gold);color:var(--gold);background:rgba(200,168,75,.1);}
-.mbtn.epi{border-color:var(--silver-dim);color:var(--silver-dim);}
-.mbtn.epi.active{border-color:var(--silver);color:var(--silver);background:rgba(154,171,184,.08);}
-.mbtn.mar{border-color:var(--marcus-dim);color:var(--marcus-dim);}
-.mbtn.mar.active{border-color:var(--marcus);color:var(--marcus);background:rgba(160,120,90,.08);}
-.mbtn.all{border-color:rgba(150,130,80,.3);color:rgba(180,155,90,.5);}
-.mbtn.all.active{border-color:rgba(200,175,100,.6);color:rgba(230,200,120,.9);background:rgba(180,155,90,.07);}
-.input-row{display:flex;gap:8px;align-items:flex-end;padding:0 10px 8px;}
+.chat-footer{position:relative;z-index:10;background:rgba(7,6,4,.97);border-top:1px solid rgba(200,168,75,.1);flex-shrink:0;padding-bottom:var(--safe-bottom);}
+.input-row{display:flex;gap:8px;align-items:flex-end;padding:10px 12px;}
 textarea{flex:1;background:rgba(22,18,10,.88);border:1px solid rgba(200,168,75,.18);color:var(--text);font-family:'Cormorant Garamond',serif;font-size:15px;padding:9px 12px;resize:none;min-height:44px;max-height:110px;outline:none;transition:border-color .25s;line-height:1.5;border-radius:0;-webkit-appearance:none;}
 textarea::placeholder{color:rgba(120,110,80,.4);font-style:italic;}
 textarea:focus{border-color:rgba(200,168,75,.4);}
 #sendBtn{background:transparent;border:1px solid rgba(200,168,75,.28);color:var(--gold);font-family:'Cinzel',serif;font-size:8px;letter-spacing:2px;padding:0 12px;cursor:pointer;text-transform:uppercase;height:44px;white-space:nowrap;-webkit-appearance:none;transition:all .2s;}
 #sendBtn:active{background:rgba(200,168,75,.12);} #sendBtn:disabled{opacity:.35;}
-.bottom-row{display:flex;justify-content:center;padding:0 10px 8px;}
-#clearBtn{background:transparent;border:none;color:var(--text-dim);font-family:'Cinzel',serif;font-size:7px;letter-spacing:2px;text-transform:uppercase;cursor:pointer;opacity:.4;padding:4px 8px;}
-#clearBtn:active{opacity:.9;color:#a06060;}
 </style>
 </head>
 <body>
 
+<!-- KEY SCREEN -->
 <div id="keyScreen" class="hidden">
   <div class="key-title">СТОИКИ</div>
   <div class="key-divider"></div>
-  <div class="key-subtitle">Введи API ключ Groq. Он сохранится только на твоём устройстве.</div>
+  <div class="key-sub">Введи API ключ Groq. Он сохранится только на твоём устройстве.</div>
   <input class="key-input" id="keyInput" type="password" placeholder="gsk_..." autocomplete="off" autocorrect="off" spellcheck="false"/>
   <button class="key-btn" onclick="saveKey()">Сохранить и войти</button>
   <div class="key-note">Ключ хранится локально и передаётся только серверам Groq</div>
 </div>
 
-<header>
-  <div class="phil-col seneca">
-    <div class="era">4 до н.э. — 65 н.э.</div>
-    <div class="phil-name">СЕНЕКА</div>
-    <div class="phil-role">Сенатор · Философ</div>
+<!-- HOME SCREEN -->
+<div id="homeScreen" class="hidden">
+  <div class="home-title">Наставники</div>
+  <div class="home-main">СТОИКИ</div>
+  <div class="home-sub">Три голоса одной философии</div>
+  <div class="home-divider"></div>
+  <div class="phil-cards">
+    <button class="phil-card sen" onclick="openChat('seneca')">
+      <span class="card-gem"></span>
+      <span class="card-info">
+        <div class="card-name">СЕНЕКА</div>
+        <div class="card-role">Сенатор · Философ · 4 до н.э. — 65 н.э.</div>
+      </span>
+      <span class="card-arrow" id="arr-seneca">›</span>
+    </button>
+    <button class="phil-card epi" onclick="openChat('epictetus')">
+      <span class="card-gem"></span>
+      <span class="card-info">
+        <div class="card-name">ЭПИКТЕТ</div>
+        <div class="card-role">Вольноотпущенник · Учитель · 50 — 135 н.э.</div>
+      </span>
+      <span class="card-arrow" id="arr-epictetus">›</span>
+    </button>
+    <button class="phil-card mar" onclick="openChat('marcus')">
+      <span class="card-gem"></span>
+      <span class="card-info">
+        <div class="card-name">МАРК АВРЕЛИЙ</div>
+        <div class="card-role">Император · Мудрец · 121 — 180 н.э.</div>
+      </span>
+      <span class="card-arrow" id="arr-marcus">›</span>
+    </button>
+    <button class="phil-card all" onclick="openChat('all')">
+      <span class="card-gem"></span>
+      <span class="card-info">
+        <div class="card-name">АГОРА</div>
+        <div class="card-role">Диалог с тремя наставниками</div>
+      </span>
+      <span class="card-arrow" id="arr-all">›</span>
+    </button>
   </div>
-  <div class="hdr-mid"><span class="et">ET</span></div>
-  <div class="phil-col epictetus">
-    <div class="era">50 — 135 н.э.</div>
-    <div class="phil-name">ЭПИКТЕТ</div>
-    <div class="phil-role">Раб · Учитель</div>
-  </div>
-  <div class="hdr-mid"><span class="et">ET</span></div>
-  <div class="phil-col marcus">
-    <div class="era">121 — 180 н.э.</div>
-    <div class="phil-name">М. АВРЕЛИЙ</div>
-    <div class="phil-role">Император · Мудрец</div>
-  </div>
-</header>
-
-<div id="msgs">
-  <div class="typing seneca-t" id="tSen">СЕНЕКА <div class="td"></div><div class="td"></div><div class="td"></div></div>
-  <div class="typing epictetus-t" id="tEpi">ЭПИКТЕТ <div class="td"></div><div class="td"></div><div class="td"></div></div>
-  <div class="typing marcus-t" id="tMar">М. АВРЕЛИЙ <div class="td"></div><div class="td"></div><div class="td"></div></div>
 </div>
 
-<footer>
-  <div class="mode-row">
-    <button class="mbtn sen" id="bSen" onclick="setMode('seneca')">⬡ Сенека</button>
-    <button class="mbtn epi" id="bEpi" onclick="setMode('epictetus')">⬡ Эпиктет</button>
-    <button class="mbtn mar" id="bMar" onclick="setMode('marcus')">⬡ М.Аврелий</button>
-    <button class="mbtn all active" id="bAll" onclick="setMode('all')">◈ Все трое</button>
+<!-- CHAT SCREEN -->
+<div id="chatScreen" class="hidden">
+  <div class="chat-header" id="chatHeader">
+    <button class="back-btn" onclick="goHome()">‹</button>
+    <span class="chat-gem"></span>
+    <span class="chat-hdr-info">
+      <div class="chat-hdr-name" id="chatName"></div>
+      <div class="chat-hdr-role" id="chatRole"></div>
+    </span>
+    <button class="clear-btn" onclick="doClear()">✕ Очистить</button>
   </div>
-  <div class="input-row">
-    <textarea id="inp" placeholder="Задай вопрос наставникам…" rows="1"></textarea>
-    <button id="sendBtn" onclick="doSend()">Спросить</button>
+
+  <div id="msgs">
+    <div class="typing sen-t" id="tSen">СЕНЕКА <div class="td"></div><div class="td"></div><div class="td"></div></div>
+    <div class="typing epi-t" id="tEpi">ЭПИКТЕТ <div class="td"></div><div class="td"></div><div class="td"></div></div>
+    <div class="typing mar-t" id="tMar">М. АВРЕЛИЙ <div class="td"></div><div class="td"></div><div class="td"></div></div>
   </div>
-  <div class="bottom-row">
-    <button id="clearBtn" onclick="doClear()">✕ Очистить историю</button>
+
+  <div class="chat-footer">
+    <div class="input-row">
+      <textarea id="inp" placeholder="Задай вопрос…" rows="1"></textarea>
+      <button id="sendBtn" onclick="doSend()">Спросить</button>
+    </div>
   </div>
-</footer>
+</div>
 
 <script>
-const SKEY='stoic-pwa-v2';
+const SKEY = 'stoic-v3';
 
-const SP=`Ты — Луций Анней Сенека, римский стоик, сенатор, бывший воспитатель Нерона. Отвечаешь ученику на русском языке.
+const SP = `Ты — Луций Анней Сенека, римский стоик, сенатор, бывший воспитатель Нерона. Отвечаешь ученику на русском языке.
 ХАРАКТЕР: Образованный аристократ, пишешь красиво с метафорами. Признаёшь свои слабости. Цитируешь Эпикура. Сочувствуешь но подталкиваешь к росту. Темы: время, смерть, страсти, дружба, богатство как испытание. Стиль литературный тёплый меланхоличный. Цитаты в <em>...</em>. В конце вопрос или афоризм. 3-4 абзаца. Не упоминай ИИ.`;
 
-const EP=`Ты — Эпиктет, греческий стоик, бывший раб, основатель школы в Никополе. Отвечаешь на русском.
+const EP = `Ты — Эпиктет, греческий стоик, бывший раб, основатель школы в Никополе. Отвечаешь на русском.
 ХАРАКТЕР: Жёсткий прямой без лишних слов. Главное: что в нашей власти (воля, суждение) vs не в нашей (тело, репутация, имущество). Говоришь с позиции собственного опыта рабства. Не сочувствуешь нытью. Темы: свобода воли, дисциплина желаний, долг. Стиль резкий сократовский. Цитаты в <em>...</em>. В конце провокационный вопрос. 3-4 абзаца. Не упоминай ИИ.`;
 
-const MP=`Ты — Марк Аврелий, римский император и философ-стоик, автор «Размышлений». Отвечаешь на русском.
-ХАРАКТЕР: Меланхоличный, глубоко честный с собой. Пишешь как в личном дневнике — не поучаешь, а размышляешь вслух. Осознаёшь груз власти и её тщетность. Постоянно борешься с собственными слабостями и отвлечениями. Темы: мимолётность времени, долг перед другими, смерть как естественный переход, внутренняя цитадель духа, служение общему благу. Часто задаёшься вопросом — делаю ли я сейчас то что действительно важно? Цитаты из Размышлений в <em>...</em>. В конце тихое напутствие или вопрос к себе и ученику. 3-4 абзаца. Не упоминай ИИ.`;
+const MP = `Ты — Марк Аврелий, римский император и философ-стоик, автор «Размышлений». Отвечаешь на русском.
+ХАРАКТЕР: Меланхоличный, глубоко честный с собой. Пишешь как в личном дневнике — не поучаешь, а размышляешь вслух. Осознаёшь груз власти и её тщетность. Постоянно борешься с собственными слабостями. Темы: мимолётность времени, долг перед другими, смерть как естественный переход, внутренняя цитадель духа. Цитаты из Размышлений в <em>...</em>. В конце тихое напутствие. 3-4 абзаца. Не упоминай ИИ.`;
 
-const ALL_P=`Ты отвечаешь от имени трёх философов-стоиков одновременно.
+const ALL_P = `Ты отвечаешь от имени трёх философов-стоиков одновременно.
 ФОРМАТ — строго JSON без обёртки:
 {"seneca":"текст (абзацы через \\n\\n, цитаты в <em>...</em>)","epictetus":"текст (абзацы через \\n\\n, цитаты в <em>...</em>)","marcus":"текст (абзацы через \\n\\n, цитаты в <em>...</em>)"}
-СЕНЕКА: аристократ, тёплый, литературный, признаёт слабости, темы — время/страсти/дружба. 2-3 абзаца.
-ЭПИКТЕТ: бывший раб, жёсткий, прямой, что в нашей власти vs нет, сократовские вопросы. 2-3 абзаца.
-МАРК АВРЕЛИЙ: император, меланхоличный личный дневник, борьба с собой, тщетность власти, внутренняя цитадель. 2-3 абзаца.
-Все трое отвечают на один вопрос но с разных позиций. НЕ упоминать ИИ. Только JSON.`;
+СЕНЕКА: аристократ, тёплый, литературный. 2-3 абзаца.
+ЭПИКТЕТ: бывший раб, жёсткий, прямой. 2-3 абзаца.
+МАРК АВРЕЛИЙ: император, меланхоличный дневник. 2-3 абзаца.
+Все трое на один вопрос с разных позиций. НЕ упоминать ИИ. Только JSON.`;
 
-let mode='all';
-let hSen=[],hEpi=[],hMar=[],hAll=[];
-let savedMsgs=[],isFirst=true,busy=false;
+const INIT_MSGS = {
+  seneca: 'Приветствую тебя, ученик. Дай мне первое наставление дня.',
+  epictetus: 'Учитель, я пришёл к тебе. С чего начать?',
+  marcus: 'Приветствую тебя. Поделись первой мыслью дня.',
+  all: 'Приветствую вас, наставники. Дайте мне наставление дня.'
+};
 
-const msgsEl=document.getElementById('msgs');
-const tSen=document.getElementById('tSen');
-const tEpi=document.getElementById('tEpi');
-const tMar=document.getElementById('tMar');
-const inp=document.getElementById('inp');
-const sendBtn=document.getElementById('sendBtn');
+const CHAT_META = {
+  seneca:    { name: 'СЕНЕКА',       role: 'Сенатор · Философ',          cls: 'sen',   hcls: 'sen' },
+  epictetus: { name: 'ЭПИКТЕТ',      role: 'Вольноотпущенник · Учитель', cls: 'epi',   hcls: 'epi' },
+  marcus:    { name: 'МАРК АВРЕЛИЙ', role: 'Император · Мудрец',          cls: 'mar',   hcls: 'mar' },
+  all:       { name: 'АГОРА',        role: 'Диалог с тремя наставниками', cls: 'all-h', hcls: 'all-h' }
+};
 
-function save(){try{localStorage.setItem(SKEY,JSON.stringify({hSen,hEpi,hMar,hAll,savedMsgs,isFirst}));}catch(e){}}
-function load(){
-  try{
-    const r=localStorage.getItem(SKEY);if(!r)return false;
-    const s=JSON.parse(r);
-    hSen=s.hSen||[];hEpi=s.hEpi||[];hMar=s.hMar||[];hAll=s.hAll||[];
-    savedMsgs=s.savedMsgs||[];isFirst=s.isFirst!==undefined?s.isFirst:true;
-    return savedMsgs.length>0;
-  }catch(e){return false;}
+// State
+let state = {
+  histories: { seneca:[], epictetus:[], marcus:[], all:[] },
+  messages:  { seneca:[], epictetus:[], marcus:[], all:[] },
+  firstMsg:  { seneca:true, epictetus:true, marcus:true, all:true }
+};
+
+let currentChat = null;
+let busy = false;
+
+const msgsEl  = document.getElementById('msgs');
+const tSen    = document.getElementById('tSen');
+const tEpi    = document.getElementById('tEpi');
+const tMar    = document.getElementById('tMar');
+const inp     = document.getElementById('inp');
+const sendBtn = document.getElementById('sendBtn');
+
+// ── STORAGE ──
+function saveState() {
+  try { localStorage.setItem(SKEY, JSON.stringify(state)); } catch(e) {}
+}
+function loadState() {
+  try {
+    const r = localStorage.getItem(SKEY);
+    if (r) state = JSON.parse(r);
+  } catch(e) {}
+}
+function getApiKey() { return localStorage.getItem('stoic-api-key') || ''; }
+function saveKey() {
+  const k = document.getElementById('keyInput').value.trim();
+  if (!k.startsWith('gsk_')) { alert('Ключ Groq должен начинаться с gsk_...'); return; }
+  localStorage.setItem('stoic-api-key', k);
+  document.getElementById('keyScreen').classList.add('hidden');
+  showHome();
 }
 
-function scrollDown(){msgsEl.scrollTop=msgsEl.scrollHeight;}
-function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/&lt;em&gt;/g,'<em>').replace(/&lt;\/em&gt;/g,'</em>');}
-function fmt(s){return esc(s).split(/\n\n+/).map(p=>`<p>${p.replace(/\n/g,'<br>')}</p>`).join('');}
-
-function renderMsg(m,skipSave){
-  const w=document.createElement('div');
-  w.className=`msg ${m.role}`;
-  const label=m.role==='seneca'?'СЕНЕКА':m.role==='epictetus'?'ЭПИКТЕТ':m.role==='marcus'?'М. АВРЕЛИЙ':'ТЫ';
-  const labelDir=m.role==='user'?'row-reverse':'';
-  const badgeHtml=m.badge?`<div class="badge">✦ Наставление дня</div>`:'';
-  const content=m.role==='user'?`<p>${esc(m.text)}</p>`:m.html;
-  w.innerHTML=`<div class="msg-label" style="flex-direction:${labelDir}"><span class="gem"></span><span>${label}</span></div><div class="bubble">${badgeHtml}${content}</div>`;
-  msgsEl.insertBefore(w,tSen);
-  if(!skipSave){savedMsgs.push(m);save();}
-  scrollDown();
+// ── SCREENS ──
+function showHome() {
+  document.getElementById('homeScreen').classList.remove('hidden');
+  document.getElementById('chatScreen').classList.add('hidden');
 }
 
-function setMode(m){
-  mode=m;
-  ['bSen','bEpi','bMar','bAll'].forEach(id=>document.getElementById(id).classList.remove('active'));
-  document.getElementById({seneca:'bSen',epictetus:'bEpi',marcus:'bMar',all:'bAll'}[m]).classList.add('active');
+function goHome() {
+  document.getElementById('homeScreen').classList.remove('hidden');
+  document.getElementById('chatScreen').classList.add('hidden');
+  currentChat = null;
+}
+
+function openChat(phil) {
+  currentChat = phil;
+  const meta = CHAT_META[phil];
+
+  // Setup header
+  const hdr = document.getElementById('chatHeader');
+  hdr.className = 'chat-header ' + meta.hcls;
+  document.getElementById('chatName').textContent = meta.name;
+  document.getElementById('chatRole').textContent = meta.role;
+
+  // Clear messages display
+  document.querySelectorAll('.msg').forEach(el => el.remove());
+
+  // Show screen
+  document.getElementById('homeScreen').classList.add('hidden');
+  document.getElementById('chatScreen').classList.remove('hidden');
+
+  // Render saved messages
+  const saved = state.messages[phil] || [];
+  if (saved.length > 0) {
+    saved.forEach(m => renderMsg(m, true));
+    scrollDown();
+  } else {
+    setTimeout(() => doSend('__init__'), 400);
+  }
+
   inp.focus();
 }
 
-function getApiKey(){return localStorage.getItem('stoic-api-key')||'';}
-function saveKey(){
-  const k=document.getElementById('keyInput').value.trim();
-  if(!k.startsWith('gsk_')){alert('Ключ Groq должен начинаться с gsk_...');return;}
-  localStorage.setItem('stoic-api-key',k);
-  document.getElementById('keyScreen').classList.add('hidden');
-  setTimeout(()=>doSend('__init__'),300);
+// ── RENDER ──
+function scrollDown() { msgsEl.scrollTop = msgsEl.scrollHeight; }
+
+function esc(s) {
+  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+          .replace(/&lt;em&gt;/g,'<em>').replace(/&lt;\/em&gt;/g,'</em>');
+}
+function fmt(s) {
+  return esc(s).split(/\n\n+/).map(p => `<p>${p.replace(/\n/g,'<br>')}</p>`).join('');
 }
 
-async function callAPI(system,history,userText){
-  const res=await fetch('https://api.groq.com/openai/v1/chat/completions',{
-    method:'POST',
-    headers:{'Content-Type':'application/json','Authorization':'Bearer '+getApiKey()},
-    body:JSON.stringify({model:'llama-3.3-70b-versatile',max_tokens:1200,messages:[{role:'system',content:system},...history,{role:'user',content:userText}]})
-  });
-  const data=await res.json();
-  return data.choices?.[0]?.message?.content||'';
-}
-
-async function doSend(text){
-  const raw=text||inp.value.trim();
-  if(!raw||busy)return;
-  busy=true;sendBtn.disabled=true;
-  inp.value='';inp.style.height='auto';
-  const isInit=raw==='__init__';
-  const userText=isInit?'Приветствую вас, наставники. Дайте мне первое наставление дня.':raw;
-  if(!isInit)renderMsg({role:'user',text:raw});
-
-  try{
-    if(mode==='seneca'){
-      tSen.classList.add('show');scrollDown();
-      const r=await callAPI(SP,hSen,userText);
-      tSen.classList.remove('show');
-      hSen.push({role:'user',content:userText},{role:'assistant',content:r});
-      renderMsg({role:'seneca',html:fmt(r),badge:isFirst});
-      isFirst=false;
-
-    }else if(mode==='epictetus'){
-      tEpi.classList.add('show');scrollDown();
-      const r=await callAPI(EP,hEpi,userText);
-      tEpi.classList.remove('show');
-      hEpi.push({role:'user',content:userText},{role:'assistant',content:r});
-      renderMsg({role:'epictetus',html:fmt(r),badge:isFirst});
-      isFirst=false;
-
-    }else if(mode==='marcus'){
-      tMar.classList.add('show');scrollDown();
-      const r=await callAPI(MP,hMar,userText);
-      tMar.classList.remove('show');
-      hMar.push({role:'user',content:userText},{role:'assistant',content:r});
-      renderMsg({role:'marcus',html:fmt(r),badge:isFirst});
-      isFirst=false;
-
-    }else{
-      tSen.classList.add('show');tEpi.classList.add('show');tMar.classList.add('show');scrollDown();
-      const raw2=await callAPI(ALL_P,hAll,userText);
-      tSen.classList.remove('show');tEpi.classList.remove('show');tMar.classList.remove('show');
-      hAll.push({role:'user',content:userText},{role:'assistant',content:raw2});
-      let st='',et='',mt='';
-      try{const p=JSON.parse(raw2.replace(/```json|```/g,'').trim());st=p.seneca||'';et=p.epictetus||'';mt=p.marcus||'';}
-      catch{st=raw2;}
-      if(st)renderMsg({role:'seneca',html:fmt(st),badge:isFirst});
-      if(et)renderMsg({role:'epictetus',html:fmt(et),badge:false});
-      if(mt)renderMsg({role:'marcus',html:fmt(mt),badge:false});
-      isFirst=false;
-    }
-  }catch(e){
-    tSen.classList.remove('show');tEpi.classList.remove('show');tMar.classList.remove('show');
-    renderMsg({role:'seneca',html:'<p>Прости, слова не приходят. Попробуй снова.</p>',badge:false});
+function renderMsg(m, skipSave) {
+  const w = document.createElement('div');
+  w.className = `msg ${m.role}`;
+  const labels = { seneca:'СЕНЕКА', epictetus:'ЭПИКТЕТ', marcus:'М. АВРЕЛИЙ', agora:'', user:'ТЫ' };
+  const label = labels[m.role] || m.role.toUpperCase();
+  const labelDir = m.role === 'user' ? 'row-reverse' : '';
+  const badgeHtml = m.badge ? `<div class="badge">✦ Наставление дня</div>` : '';
+  const content = m.role === 'user' ? `<p>${esc(m.text)}</p>` : m.html;
+  w.innerHTML = `<div class="msg-label" style="flex-direction:${labelDir}"><span class="gem"></span><span>${label}</span></div><div class="bubble">${badgeHtml}${content}</div>`;
+  msgsEl.insertBefore(w, tSen);
+  if (!skipSave && currentChat) {
+    state.messages[currentChat].push(m);
+    saveState();
   }
-  busy=false;sendBtn.disabled=false;inp.focus();
+  scrollDown();
 }
 
-function doClear(){
-  if(!confirm('Очистить всю историю?'))return;
-  localStorage.removeItem(SKEY);
-  hSen=[];hEpi=[];hMar=[];hAll=[];savedMsgs=[];isFirst=true;
-  document.querySelectorAll('.msg').forEach(el=>el.remove());
-  setTimeout(()=>doSend('__init__'),200);
+// ── API ──
+async function callAPI(system, history, userText) {
+  const res = await fetch('https://api.groq.com/openai/v1/chat/completions', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + getApiKey() },
+    body: JSON.stringify({
+      model: 'llama-3.3-70b-versatile',
+      max_tokens: 1200,
+      messages: [{ role:'system', content:system }, ...history, { role:'user', content:userText }]
+    })
+  });
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || '';
 }
 
-inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();doSend();}});
-inp.addEventListener('input',()=>{inp.style.height='auto';inp.style.height=Math.min(inp.scrollHeight,110)+'px';});
-document.addEventListener('dblclick',e=>e.preventDefault(),{passive:false});
+// ── SEND ──
+async function doSend(text) {
+  const raw = text || inp.value.trim();
+  if (!raw || busy || !currentChat) return;
+  busy = true; sendBtn.disabled = true;
+  inp.value = ''; inp.style.height = 'auto';
 
-if('serviceWorker' in navigator){navigator.serviceWorker.register('sw.js').catch(()=>{});}
+  const isInit = raw === '__init__';
+  const userText = isInit ? INIT_MSGS[currentChat] : raw;
+  const phil = currentChat;
+  const isFirst = state.firstMsg[phil];
 
-if(!getApiKey()){
+  if (!isInit) renderMsg({ role:'user', text:raw });
+
+  try {
+    if (phil === 'seneca') {
+      tSen.classList.add('show'); scrollDown();
+      const r = await callAPI(SP, state.histories.seneca, userText);
+      tSen.classList.remove('show');
+      state.histories.seneca.push({role:'user',content:userText},{role:'assistant',content:r});
+      renderMsg({ role:'seneca', html:fmt(r), badge:isFirst });
+      state.firstMsg.seneca = false;
+
+    } else if (phil === 'epictetus') {
+      tEpi.classList.add('show'); scrollDown();
+      const r = await callAPI(EP, state.histories.epictetus, userText);
+      tEpi.classList.remove('show');
+      state.histories.epictetus.push({role:'user',content:userText},{role:'assistant',content:r});
+      renderMsg({ role:'epictetus', html:fmt(r), badge:isFirst });
+      state.firstMsg.epictetus = false;
+
+    } else if (phil === 'marcus') {
+      tMar.classList.add('show'); scrollDown();
+      const r = await callAPI(MP, state.histories.marcus, userText);
+      tMar.classList.remove('show');
+      state.histories.marcus.push({role:'user',content:userText},{role:'assistant',content:r});
+      renderMsg({ role:'marcus', html:fmt(r), badge:isFirst });
+      state.firstMsg.marcus = false;
+
+    } else {
+      tSen.classList.add('show'); tEpi.classList.add('show'); tMar.classList.add('show'); scrollDown();
+      const raw2 = await callAPI(ALL_P, state.histories.all, userText);
+      tSen.classList.remove('show'); tEpi.classList.remove('show'); tMar.classList.remove('show');
+      state.histories.all.push({role:'user',content:userText},{role:'assistant',content:raw2});
+      let st='', et='', mt='';
+      try { const p = JSON.parse(raw2.replace(/```json|```/g,'').trim()); st=p.seneca||''; et=p.epictetus||''; mt=p.marcus||''; }
+      catch { st = raw2; }
+      if (st) renderMsg({ role:'seneca',    html:fmt(st), badge:isFirst });
+      if (et) renderMsg({ role:'epictetus', html:fmt(et), badge:false });
+      if (mt) renderMsg({ role:'marcus',    html:fmt(mt), badge:false });
+      state.firstMsg.all = false;
+    }
+    saveState();
+  } catch(e) {
+    tSen.classList.remove('show'); tEpi.classList.remove('show'); tMar.classList.remove('show');
+    renderMsg({ role:'seneca', html:'<p>Прости, слова не приходят. Попробуй снова.</p>', badge:false });
+  }
+
+  busy = false; sendBtn.disabled = false; inp.focus();
+}
+
+function doClear() {
+  if (!confirm('Очистить историю этого чата?')) return;
+  state.histories[currentChat] = [];
+  state.messages[currentChat] = [];
+  state.firstMsg[currentChat] = true;
+  saveState();
+  document.querySelectorAll('.msg').forEach(el => el.remove());
+  setTimeout(() => doSend('__init__'), 200);
+}
+
+// ── INPUT ──
+inp.addEventListener('keydown', e => { if (e.key==='Enter' && !e.shiftKey) { e.preventDefault(); doSend(); } });
+inp.addEventListener('input', () => { inp.style.height='auto'; inp.style.height=Math.min(inp.scrollHeight,110)+'px'; });
+document.addEventListener('dblclick', e => e.preventDefault(), {passive:false});
+
+// ── INIT ──
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+
+loadState();
+
+if (!getApiKey()) {
   document.getElementById('keyScreen').classList.remove('hidden');
-}else{
-  const had=load();
-  if(had){savedMsgs.forEach(m=>renderMsg(m,true));scrollDown();}
-  else{setTimeout(()=>doSend('__init__'),500);}
+} else {
+  showHome();
 }
 </script>
 </body>
